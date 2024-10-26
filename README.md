@@ -4,6 +4,7 @@ This network comprises of L2/L3 protocols which consists of:
 ip route 
 stp
 vlan
+trunking
 nat
 ospf
 rip
