@@ -5,6 +5,7 @@ This network comprises of L2/L3 protocols which consists of:
 - stp
 - vlan
 - trunking
+- hsrp
 - nat
 - ospf
 - rip
