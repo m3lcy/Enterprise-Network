@@ -1,0 +1,177 @@
+!
+version 12.2(37)SE1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname DLS1
+!
+!
+!
+!
+!
+!
+ip routing
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree vlan 10,12,30 priority 24576
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport trunk native vlan 99
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/3
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+ no switchport
+ ip address 172.16.12.225 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ switchport trunk native vlan 99
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ mac-address 00e0.a3a4.6401
+ ip address 172.16.12.1 255.255.255.224
+ ip helper-address 172.16.12.226
+ ip nat inside
+ standby version 2
+ standby 1 ip 172.16.12.254
+ standby 1 priority 150
+ standby 1 preempt
+!
+interface Vlan20
+ mac-address 00e0.a3a4.6402
+ ip address 172.16.12.33 255.255.255.224
+ ip helper-address 172.16.12.226
+ ip nat inside
+ standby version 2
+ standby 1 ip 172.16.12.254
+ standby 1 priority 150
+ standby 1 preempt
+!
+interface Vlan30
+ description DLS1 Management Interface
+ mac-address 00e0.a3a4.6403
+ ip address 172.16.12.65 255.255.255.224
+ ip helper-address 172.16.12.226
+ ip nat inside
+!
+interface Vlan99
+ mac-address 00e0.a3a4.6404
+ ip address 172.16.12.97 255.255.255.224
+ ip helper-address 172.16.12.226
+ ip nat inside
+!
+router ospf 1
+ log-adjacency-changes
+ network 172.16.12.0 0.0.0.31 area 0
+ network 172.16.12.32 0.0.0.31 area 0
+ network 172.16.12.64 0.0.0.31 area 0
+ network 172.16.12.96 0.0.0.31 area 0
+ network 172.16.12.224 0.0.0.31 area 0
+!
+router rip
+ version 2
+ network 172.16.0.0
+ no auto-summary
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+banner motd ^CAuthorized Access Only!!!^C
+!
+!
+!
+!
+!
+line con 0
+ login
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+!
+end
