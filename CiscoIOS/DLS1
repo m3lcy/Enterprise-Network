@@ -28,7 +28,7 @@ ip routing
 !
 !
 spanning-tree mode pvst
-spanning-tree vlan 10,12,30 priority 24576
+spanning-tree vlan 10,20,30 priority 24576
 !
 !
 !
