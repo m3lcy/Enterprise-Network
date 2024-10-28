@@ -1,0 +1,53 @@
+- name: SW2 IOS CONFIG
+  hosts: SW2
+  connection: network_cli
+  gather_facts: no
+
+  tasks:
+
+    - name: SET HOSTNAME
+      ios_config:
+        commands:
+          - hostname SW2
+
+    - name: SET BANNER
+      ios_config:
+        commands:
+          - ^Authorized Access Only!!!^
+
+    - name: CONFIGURE VTP
+      ios_config:  
+        command:
+          - vtp mode client
+          - vtp domain BRANCH_NYC
+          - vtp version 2
+
+    - name: CONFIGURE STP
+      ios_config:
+        command:
+          - spanning-tree mode pvst
+
+    - name: CONFIGURE TRUNK INTERFACE
+      ios_config:
+        parents:
+          - interface FastEthernet0/1
+        commands:
+          - switchport trunk native vlan 99
+          - switchport mode trunk
+
+    - name: CONFIGURE INTERFACES
+      ios_config:
+        parents:
+          - interface FastEthernet0/2
+          - interface FastEthernet0/3
+        commands:
+          - switchport access vlan 20
+          - switchport mode access
+
+    - name: CONFIGURE GIGABIT INTERFACE
+      ios_config:
+        parents:
+          - interface GigabitEthernet0/1
+        commands:
+          - switchport trunk native vlan 99
+          - switchport mode trunk
