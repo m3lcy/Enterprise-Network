@@ -16,7 +16,7 @@ This network comprises of L2/L3 networking protocols which consists of:
 - ACL
 
 Prerequisites for running the Ansible playbook:
-Python installed
-Ansible installed
-Inventory file
-SSH Access to device
+- Python installed
+- Ansible installed
+- Inventory file
+- SSH Access to device
