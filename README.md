@@ -14,3 +14,9 @@ This network comprises of L2/L3 networking protocols which consists of:
 - RIP
 - DHCP
 - ACL
+
+Prerequisites for running the Ansible playbook:
+Python installed
+Ansible installed
+Inventory file
+SSH Access to device
