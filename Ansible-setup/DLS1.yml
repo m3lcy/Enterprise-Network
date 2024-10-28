@@ -130,7 +130,6 @@
           - interface vlan30
         commands:
           - description DLS1 Management Interface
-
           - ip address 172.16.12.65 255.255.255.224
           - ip helper-address 172.16.12.226
           - ip nat inside
