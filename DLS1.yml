@@ -1,0 +1,169 @@
+- name: DLS1 IOS CONFIG
+  hosts: DLS1
+  connection: network_cli
+  gather_facts: no
+
+  tasks:
+
+    - name: SET HOSTNAME
+      ios_config:
+        commands:
+          - hostname DLS1
+
+    - name: SET BANNER
+      ios_config:
+        commands:
+          - banner motd ^Authorized Access Only!!!^
+
+    - name: Enable IP Routing
+      ios_config:
+        commands:
+          - ip routing
+
+    - name: Configure VLAN Names
+      ios_config:
+        parents:
+          - vlan 10
+        commands:
+          - name Sales
+
+    - name: Configure VLAN Names
+      ios_config:
+        parents:
+          - vlan 20
+        commands:
+          - name Engineering
+
+    - name: Configure VLAN Names
+      ios_config:
+        parents:
+          - vlan 30
+        commands:
+          - name Marketing
+
+    - name: Configure VLAN Names
+      ios_config:
+        parents:
+          - vlan 99
+        commands:
+          - name Management
+
+    - name: CONFIGURE VTP
+      ios_config:  
+        command:
+          - vtp mode server
+          - vtp domain BRANCH_NYC
+          - vtp version 2
+
+    - name: CONFIGURE STP
+      ios_config:
+        commands:
+          - spanning-tree mode pvst
+          - spanning-tree vlan 10,20,30 priority 24576
+
+    - name: CONFIGURE TRUNK AND NATIVE VLAN INTERFACE
+      ios_config:
+        parents: 
+          - interface FastEthernet0/1
+        commands: 
+          - switchport trunk native vlan 99
+          - switchport trunk encapsulation dot1q
+          - switchport mode trunk
+
+    - name: CONFIGURE TRUNK INTERFACES 
+      ios_config:
+        parents:
+          - interface FastEthernet0/2
+          - interface FastEthernet0/3
+        commands:
+          - switchport trunk encapsulation dot1q
+          - switchport mode trunk
+
+    - name: CONFIGURE GIGABIT INTERFACE IP ADDRESS
+      ios_config:
+        parents:
+          - interface GigabitEthernet0/1
+        commands:
+          - no switchport
+          - ip address 172.16.12.225 255.255.255.252
+          - duplex auto
+          - speed auto
+
+    - name: CONFIGURE GIGABIT INTERFACE
+      ios_config:
+        parents:
+          - interface GigabitEthernet0/2
+        commands:
+          - switchport trunk native vlan 99
+          - switchport trunk encapsulation dot1q
+          - switchport mode trunk
+
+    - name: CONFIGURE VLAN10
+      ios_config: 
+        parents: 
+          - interface vlan10
+        commands:
+          - ip address 172.16.12.1 255.255.255.224
+          - ip helper-address 172.16.12.226
+          - ip nat inside
+          - standby version 2
+          - standby 1 ip 172.16.12.254
+          - standby 1 priority 150
+          - standby 1 preempt
+
+    - name: CONFIGURE VLAN20
+      ios_config:
+        parents:
+          - interface vlan20
+        commands:
+          - ip address 172.16.12.33 255.255.255.224
+          - ip helper-address 172.16.12.226
+          - ip nat inside
+          - standby version 2
+          - standby 1 ip 172.16.12.254
+          - standby 1 priority 150
+          - standby 1 preempt
+
+    - name: CONFIGURE VLAN30
+      ios_config:
+        parents:
+          - interface vlan30
+        commands:
+          - description DLS1 Management Interface
+
+          - ip address 172.16.12.65 255.255.255.224
+          - ip helper-address 172.16.12.226
+          - ip nat inside
+
+    - name: CONFIGURE VLAN99
+      ios_config:
+        parents:
+          - interface vlan99
+        commands:
+          - ip address 172.16.12.97 255.255.255.224
+          - ip helper-address 172.16.12.226
+          - ip nat inside
+
+    - name: CONFIGURE OSPF 
+      ios_config:
+        parents:
+          - router ospf 1
+        commands:
+          - log-adjacency-changes
+          - network 172.16.12.0 0.0.0.31 area 0
+          - network 172.16.12.32 0.0.0.31 area 0
+          - network 172.16.12.64 0.0.0.31 area 0
+          - network 172.16.12.96 0.0.0.31 area 0
+          - network 172.16.12.224 0.0.0.31 area 0
+
+    - name: CONFIGURE RIP
+      ios_config:
+        parents:
+          - router rip
+        commands:
+          - version 2
+          - network 172.16.0.0
+          - no auto-summary
+        
+
+   
