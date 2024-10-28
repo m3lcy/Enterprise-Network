@@ -5,6 +5,7 @@ There is the Cisco IOS version of the network configuration and there will also 
 This network comprises of L2/L3 networking protocols which consists of:
 - IP ROUTE 
 - STP
+- VTP
 - VLAN
 - TRUNKING
 - HSRP
@@ -12,4 +13,4 @@ This network comprises of L2/L3 networking protocols which consists of:
 - OSPF
 - RIP
 - DHCP
-- VTP
+- ACL
