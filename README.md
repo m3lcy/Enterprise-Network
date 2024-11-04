@@ -15,10 +15,6 @@ This network comprises of L2/L3 networking protocols which consists of:
 - DHCP
 - ACL
 
-Topology Layout
-
-![image](https://github.com/user-attachments/assets/0337b8ae-b555-49a3-8de2-7de832e96f69)
-
 Prerequisites for running the Ansible playbook:
 - Python installed
 - Ansible installed
