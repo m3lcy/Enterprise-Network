@@ -10,6 +10,18 @@
         commands:
           - hostname R1
 
+    - name: CONFIGURE PASSWORD
+      ios_config:
+        commands:
+          - enable secret cisco123
+
+    - name: CONFIGURE LINE VTY
+      ios_config:
+        commands:
+          - line vty 0 4
+          - password r1nyc
+          - login
+
     - name: SET BANNER
       ios_config:
         commands:
