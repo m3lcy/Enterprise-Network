@@ -9,6 +9,18 @@
       ios_config:
         commands:
           - hostname DLS1
+          
+    - name: CONFIGURE PASSWORD
+      ios_config:
+        commands:
+          - enable secret cisco123
+
+    - name: CONFIGURE LINE VTY
+      ios_config:
+        commands:
+          - line vty 0 4
+          - password dls1nyc
+          - login
 
     - name: SET BANNER
       ios_config:
