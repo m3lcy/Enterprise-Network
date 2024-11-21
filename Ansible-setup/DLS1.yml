@@ -14,6 +14,7 @@
       ios_config:
         commands:
           - username admin secret cisco
+          - enable secret dls1nyc
 
     - name: ENCRYPT PLAIN TEXT
       ios_config:
