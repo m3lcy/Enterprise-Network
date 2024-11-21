@@ -4,10 +4,10 @@ no service timestamps log datetime msec
 no service timestamps debug datetime msec
 service password-encryption
 !
-hostname DLS1
+hostname DLS2
 !
 !
-enable secret 5 $1$mERr$WGssQZL5nB/YwTzIbSDR11
+enable secret 5 $1$mERr$hwx7ThfZ9C2B.5QaupQEx.
 !
 !
 !
@@ -18,7 +18,7 @@ ip routing
 !
 !
 !
-username admin secret 5 $1$mERr$5.a6P4JqbNiMX01usIfka/
+username admin secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
 !
 !
 !
@@ -34,7 +34,7 @@ ip domain-name cisco.com
 !
 !
 spanning-tree mode pvst
-spanning-tree vlan 10,12,30 priority 24576
+spanning-tree vlan 10,12,30 priority 28672
 !
 !
 !
@@ -98,7 +98,7 @@ interface FastEthernet0/24
 !
 interface GigabitEthernet0/1
  no switchport
- ip address 172.16.12.225 255.255.255.252
+ ip address 172.16.12.230 255.255.255.252
  duplex auto
  speed auto
 !
@@ -112,44 +112,23 @@ interface Vlan1
  shutdown
 !
 interface Vlan10
- mac-address 00e0.a3a4.6401
- ip address 172.16.12.1 255.255.255.224
- ip helper-address 172.16.12.226
- ip nat inside
+ mac-address 0030.f23b.0b01
+ ip address 172.16.12.2 255.255.255.252
+ ip helper-address 172.16.12.229
  standby version 2
  standby 1 ip 172.16.12.254
- standby 1 priority 150
  standby 1 preempt
 !
 interface Vlan20
- mac-address 00e0.a3a4.6402
- ip address 172.16.12.33 255.255.255.224
- ip helper-address 172.16.12.226
- ip nat inside
+ mac-address 0030.f23b.0b02
+ no ip address
+ ip helper-address 172.16.12.229
  standby version 2
  standby 1 ip 172.16.12.254
- standby 1 priority 150
  standby 1 preempt
-!
-interface Vlan30
- description DLS1 Management Interface
- mac-address 00e0.a3a4.6403
- ip address 172.16.12.65 255.255.255.224
- ip helper-address 172.16.12.226
- ip nat inside
-!
-interface Vlan99
- mac-address 00e0.a3a4.6404
- ip address 172.16.12.97 255.255.255.224
- ip helper-address 172.16.12.226
- ip nat inside
 !
 router ospf 1
  log-adjacency-changes
- network 172.16.12.0 0.0.0.31 area 0
- network 172.16.12.32 0.0.0.31 area 0
- network 172.16.12.64 0.0.0.31 area 0
- network 172.16.12.96 0.0.0.31 area 0
  network 172.16.12.224 0.0.0.31 area 0
 !
 router rip
@@ -176,6 +155,7 @@ line con 0
 line aux 0
 !
 line vty 0 4
+ exec-timeout 6 0
  password 7 0822455D0A16544541
  login local
  transport input ssh
