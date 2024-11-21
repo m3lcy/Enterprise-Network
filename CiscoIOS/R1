@@ -36,7 +36,7 @@ no ipv6 cef
 !
 !
 !
-username mel secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+username admin secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
 !
 !
 license udi pid CISCO1941/K9 sn FTX1524D11S-
