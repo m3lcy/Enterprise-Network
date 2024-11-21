@@ -18,7 +18,7 @@ ip routing
 !
 !
 !
-username cisco secret 5 $1$mERr$5.a6P4JqbNiMX01usIfka/
+username admin secret 5 $1$mERr$5.a6P4JqbNiMX01usIfka/
 !
 !
 !
