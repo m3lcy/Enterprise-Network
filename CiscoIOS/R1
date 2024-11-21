@@ -4,11 +4,11 @@ no service timestamps log datetime msec
 no service timestamps debug datetime msec
 service password-encryption
 !
-hostname Router1
+hostname R1
 !
 !
 !
-enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+enable secret 5 $1$mERr$4MWNGKxHKo8O711AlaPm51
 !
 !
 ip dhcp excluded-address 172.16.12.1 172.16.12.10
@@ -36,6 +36,8 @@ no ipv6 cef
 !
 !
 !
+username mel secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+!
 !
 license udi pid CISCO1941/K9 sn FTX1524D11S-
 !
@@ -47,6 +49,8 @@ license udi pid CISCO1941/K9 sn FTX1524D11S-
 !
 !
 !
+no ip domain-lookup
+ip domain-name cisco.com
 !
 !
 spanning-tree mode pvst
@@ -108,8 +112,9 @@ line con 0
 line aux 0
 !
 line vty 0 4
- password 7 0822455D0A16
- login
+ exec-timeout 6 0
+ login local
+ transport input ssh
 !
 !
 !
