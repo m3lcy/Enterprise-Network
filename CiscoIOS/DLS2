@@ -149,8 +149,6 @@ banner motd ^CAuthorized Access Only!!!^C
 !
 !
 line con 0
- password 7 0822455D0A16
- login
 !
 line aux 0
 !
