@@ -13,13 +13,13 @@
     - name: CONFIGURE PASSWORD
       ios_config:
         commands:
-          - enable secret cisco123
+          - enable secret sw2nyc
 
     - name: CONFIGURE LINE VTY
       ios_config:
         commands:
           - line vty 0 4
-          - password sw2nyc
+          - password cisco123
           - login
 
     - name: SET BANNER
