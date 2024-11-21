@@ -10,6 +10,7 @@ This network comprises of L2/L3 networking protocols which consists of:
 - VTP
 - VLAN
 - TRUNKING
+- SSH
 - HSRP
 - NAT
 - OSPF
