@@ -10,22 +10,38 @@
         commands:
         - hostname DLS1
 
-    - name: CONFIGURE PASSWORD
+      - name: CONFIGURE PASSWORD
       ios_config:
         commands:
-          - enable secret cisco123
+          - enable secret cisco
 
-    - name: CONFIGURE LINE VTY
+    - name: ENCRYPT PLAIN TEXT
       ios_config:
         commands:
-          - line vty 0 4
-          - password dls2nyc
-          - login
+          - service password-encryption
 
     - name: SET BANNER
       ios_config:
         commands:
           - banner motd ^Authorized Access Only!!!^
+
+    - name: CONFIGURE LINE VTY
+      ios_config:
+        parents:
+          - line vty 0 4
+        commands:
+          - password cisco123
+          - login local
+          - transport input ssh
+
+    - name: GENERATE CRYPTO KEY
+      ios_config:
+        commands:
+          - no ip domain-lookup
+          - ip domain-name cisco.com
+          - username admin secret cisco
+          - crypto key generate rsa
+          - 1024
 
     - name: Enable IP Routing
       ios_config:
