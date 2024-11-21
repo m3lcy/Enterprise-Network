@@ -7,6 +7,8 @@ service password-encryption
 hostname DLS1
 !
 !
+enable secret 5 $1$mERr$WGssQZL5nB/YwTzIbSDR11
+!
 !
 !
 !
@@ -16,6 +18,7 @@ ip routing
 !
 !
 !
+username mel secret 5 $1$mERr$5.a6P4JqbNiMX01usIfka/
 !
 !
 !
@@ -25,10 +28,13 @@ ip routing
 !
 !
 !
+!
+no ip domain-lookup
+ip domain-name cisco.com
 !
 !
 spanning-tree mode pvst
-spanning-tree vlan 10,20,30 priority 24576
+spanning-tree vlan 10,12,30 priority 24576
 !
 !
 !
@@ -164,12 +170,15 @@ banner motd ^CAuthorized Access Only!!!^C
 !
 !
 line con 0
+ password 7 0822455D0A16
  login
 !
 line aux 0
 !
 line vty 0 4
- login
+ password 7 0822455D0A16544541
+ login local
+ transport input ssh
 !
 !
 !
