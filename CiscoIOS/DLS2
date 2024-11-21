@@ -7,6 +7,8 @@ service password-encryption
 hostname DLS2
 !
 !
+enable secret 5 $1$mERr$hwx7ThfZ9C2B.5QaupQEx.
+!
 !
 !
 !
@@ -16,6 +18,7 @@ ip routing
 !
 !
 !
+username admin secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
 !
 !
 !
@@ -25,10 +28,13 @@ ip routing
 !
 !
 !
+!
+no ip domain-lookup
+ip domain-name cisco.com
 !
 !
 spanning-tree mode pvst
-spanning-tree vlan 10,20,30 priority 28672
+spanning-tree vlan 10,12,30 priority 28672
 !
 !
 !
@@ -143,12 +149,16 @@ banner motd ^CAuthorized Access Only!!!^C
 !
 !
 line con 0
+ password 7 0822455D0A16
  login
 !
 line aux 0
 !
 line vty 0 4
- login
+ exec-timeout 6 0
+ password 7 0822455D0A16544541
+ login local
+ transport input ssh
 !
 !
 !
