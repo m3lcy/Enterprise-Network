@@ -34,6 +34,7 @@
           - password cisco123
           - login local
           - transport input ssh
+          - exec-timeout 6
 
     - name: GENERATE CRYPTO KEY
       ios_config:
