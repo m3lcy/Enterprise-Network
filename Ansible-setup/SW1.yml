@@ -19,7 +19,7 @@
       ios_config:
         commands:
           - line vty 0 4
-          - password sw1nyc
+          - password cisco123
           - login
 
     - name: SET BANNER
