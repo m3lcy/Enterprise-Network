@@ -13,7 +13,7 @@
       - name: CONFIGURE PASSWORD
       ios_config:
         commands:
-          - enable secret cisco
+          - username admin secret cisco
 
     - name: ENCRYPT PLAIN TEXT
       ios_config:
