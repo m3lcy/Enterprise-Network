@@ -13,7 +13,7 @@
     - name: CONFIGURE PASSWORD
       ios_config:
         commands:
-          - enable secret cisco123
+          - enable secret sw1nyc
 
     - name: CONFIGURE LINE VTY
       ios_config:
