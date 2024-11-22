@@ -15,7 +15,7 @@ This network comprises of L2/L3 networking protocols which consists of:
 - NAT
 - OSPF
 - RIP
-- DHCP (DHCP can be done on the router, layer 3 switch or a server. In this case I did it on the router.) 
+- DHCP 
 - ACL
 
 Prerequisites for running the Ansible playbook:
