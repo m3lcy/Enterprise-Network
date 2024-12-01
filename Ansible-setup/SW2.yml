@@ -10,22 +10,38 @@
         commands:
           - hostname SW2
 
-    - name: CONFIGURE PASSWORD
+    - name: SET PASSWORD
       ios_config:
         commands:
-          - enable secret sw2nyc
-
-    - name: CONFIGURE LINE VTY
-      ios_config:
-        commands:
-          - line vty 0 4
-          - password cisco123
-          - login
+          - enable secret cisco   
 
     - name: SET BANNER
       ios_config:
         commands:
           - ^Authorized Access Only!!!^
+
+    - name: ENCRYPT PLAIN TEXT
+      ios_config:
+        commands:
+          - service password-encryption  
+
+    - name: CONFIGURE LINE VTY
+      ios_config:
+        parents:
+          - line vty 0 4
+        commands:
+          - password cisco123
+          - login local
+          - transport input ssh
+
+    - name: GENERATE CRYPTO KEY
+      ios_config:
+        commands:
+          - no ip domain-lookup
+          - ip domain-name cisco.com
+          - username admin secret cisco
+          - crypto key generate rsa
+          - 1024  
 
     - name: CONFIGURE VTP
       ios_config:  
@@ -52,6 +68,8 @@
         parents:
           - interface FastEthernet0/2
           - interface FastEthernet0/3
+          - interface FastEthernet0/4
+          - interface FastEthernet0/5
         commands:
           - switchport access vlan 20
           - switchport mode access
