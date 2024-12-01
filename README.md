@@ -4,9 +4,11 @@ This network was developed as a redundant branch office enterprise network based
 I designed this network with scalability and adaptability in mind, enabling seamless implementation of future modifications. My approach emphasizes adding versatility to networks, whether through integrating automation tools with foundational networking or making necessary adjustments as requirements evolve.
 
 Figure 3.11: Main Topology
+
 ![image](https://github.com/user-attachments/assets/8bb80974-cb35-44e8-b413-673aa4e1f9f1)
 
 Figure 3.12: VLAN Segmentation
+
 ![image](https://github.com/user-attachments/assets/4677ca6d-7053-42f2-946f-7ca98d3e470e)
 
 
