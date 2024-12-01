@@ -7,7 +7,7 @@ service password-encryption
 hostname DLS2
 !
 !
-enable secret 5 $1$mERr$hwx7ThfZ9C2B.5QaupQEx.
+enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
 !
 !
 !
@@ -55,6 +55,9 @@ interface FastEthernet0/3
  switchport mode trunk
 !
 interface FastEthernet0/4
+ switchport trunk native vlan 99
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
 !
 interface FastEthernet0/5
 !
@@ -108,7 +111,7 @@ interface GigabitEthernet0/2
  switchport mode trunk
 !
 interface Vlan1
- no ip address
+ ip address 192.168.12.67 255.255.255.224
  shutdown
 !
 interface Vlan10
@@ -136,6 +139,7 @@ router rip
  network 172.16.0.0
  no auto-summary
 !
+ip default-gateway 172.16.12.98
 ip classless
 !
 ip flow-export version 9
