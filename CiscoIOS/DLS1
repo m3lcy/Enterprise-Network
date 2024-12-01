@@ -7,7 +7,7 @@ service password-encryption
 hostname DLS1
 !
 !
-enable secret 5 $1$mERr$WGssQZL5nB/YwTzIbSDR11
+enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
 !
 !
 !
@@ -18,7 +18,7 @@ ip routing
 !
 !
 !
-username admin secret 5 $1$mERr$5.a6P4JqbNiMX01usIfka/
+username mel secret 5 $1$mERr$5.a6P4JqbNiMX01usIfka/
 !
 !
 !
@@ -57,6 +57,9 @@ interface FastEthernet0/3
 interface FastEthernet0/4
 !
 interface FastEthernet0/5
+ switchport trunk native vlan 99
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
 !
 interface FastEthernet0/6
 !
@@ -108,7 +111,7 @@ interface GigabitEthernet0/2
  switchport mode trunk
 !
 interface Vlan1
- no ip address
+ ip address 192.168.12.66 255.255.255.224
  shutdown
 !
 interface Vlan10
@@ -157,6 +160,7 @@ router rip
  network 172.16.0.0
  no auto-summary
 !
+ip default-gateway 172.16.12.98
 ip classless
 !
 ip flow-export version 9
