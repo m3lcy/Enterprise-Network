@@ -1,0 +1,83 @@
+- name: SW3 IOS CONFIG
+  hosts: SW3
+  connection: network_cli
+  gather_facts: no
+
+  tasks:
+
+    - name: SET HOSTNAME
+      ios_config:
+        commands:
+          - hostname SW3
+
+    - name: SET PASSWORD
+      ios_config:
+        commands:
+          - enable secret cisco
+
+    - name: SET BANNER
+      ios_config:
+        commands:
+          - ^Authorized Access Only!!!^
+
+    - name: ENCRYPT PLAIN TEXT
+      ios_config:
+        commands:
+          - service password-encryption    
+
+    - name: CONFIGURE LINE VTY
+      ios_config:
+        parents:
+          - line vty 0 4
+        commands:
+          - password cisco123
+          - login local
+          - transport input ssh
+
+    - name: GENERATE CRYPTO KEY
+      ios_config:
+        commands:
+          - no ip domain-lookup
+          - ip domain-name cisco.com
+          - username admin secret cisco
+          - crypto key generate rsa
+          - 1024      
+
+    - name: CONFIGURE VTP
+      ios_config:  
+        command:
+          - vtp mode client
+          - vtp domain BRANCH_NYC
+          - vtp version 2
+
+    - name: CONFIGURE STP
+      ios_config:
+        command:
+          - spanning-tree mode pvst
+
+    - name: CONFIGURE TRUNK INTERFACE
+      ios_config:
+        parents:
+          - interface FastEthernet0/1
+        commands:
+          - switchport trunk native vlan 99
+          - switchport mode trunk
+
+    - name: CONFIGURE INTERFACES
+      ios_config:
+        parents:
+          - interface FastEthernet0/2
+          - interface FastEthernet0/3
+          - interface FastEthernet0/4
+          - interface FastEthernet0/5
+        commands:
+          - switchport access vlan 30
+          - switchport mode access
+
+    - name: CONFIGURE GIGABIT INTERFACE
+      ios_config:
+        parents:
+          - interface GigabitEthernet0/1
+        commands:
+          - switchport trunk native vlan 99
+          - switchport mode trunk
