@@ -6,8 +6,14 @@ service password-encryption
 !
 hostname S2
 !
+enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
 !
 !
+!
+no ip domain-lookup
+ip domain-name cisco.com
+!
+username admin secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
 !
 !
 !
@@ -27,8 +33,12 @@ interface FastEthernet0/3
  switchport mode access
 !
 interface FastEthernet0/4
+ switchport access vlan 20
+ switchport mode access
 !
 interface FastEthernet0/5
+ switchport access vlan 20
+ switchport mode access
 !
 interface FastEthernet0/6
 !
@@ -75,18 +85,21 @@ interface GigabitEthernet0/1
 interface GigabitEthernet0/2
 !
 interface Vlan1
- no ip address
+ ip address 192.168.12.33 255.255.255.224
  shutdown
+!
+ip default-gateway 172.16.12.98
 !
 banner motd ^CAuthorized Access Only!!!^C
 !
 !
 !
 line con 0
- login
 !
 line vty 0 4
- login
+ password 7 0822455D0A16544541
+ login local
+ transport input ssh
 line vty 5 15
  login
 !
