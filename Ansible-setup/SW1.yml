@@ -81,3 +81,15 @@
         commands:
           - switchport trunk native vlan 99
           - switchport mode trunk
+
+    - name: CONFIGURE VLAN1
+      ios_config:
+        parents:
+          - interface vlan1
+        commands:
+          - ip address 172.16.12.1 255.255.255.224
+
+    - name: SET DEFAULT GATEWAY
+      ios_config:
+        commands:
+          - ip default-gateway 172.16.12.98
