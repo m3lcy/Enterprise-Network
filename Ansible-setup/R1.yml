@@ -13,7 +13,7 @@
     - name: CONFIGURE PASSWORD
       ios_config:
         commands:
-          - enable secret cisco
+          - username admin secret cisco
 
     - name: ENCRYPT PLAIN TEXT
       ios_config:
@@ -33,7 +33,6 @@
           - password cisco123
           - login local
           - transport input ssh
-          - exec-timeout 6
 
     - name: GENERATE CRYPTO KEY
       ios_config:
@@ -139,5 +138,17 @@
       ios_config:
         commands:
           - access-list 1 permit any
+
+    - name: CONFIGURE VLAN1
+      ios_config:
+        parents:
+          - interface vlan1
+        commands:
+          - ip address 172.16.12.68 255.255.255.224
+
+    - name: SET DEFAULT GATEWAY
+      ios_config:
+        commands:
+          - ip default-gateway 172.16.12.98
 
 
