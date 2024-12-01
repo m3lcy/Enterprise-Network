@@ -8,7 +8,7 @@ hostname R1
 !
 !
 !
-enable secret 5 $1$mERr$4MWNGKxHKo8O711AlaPm51
+enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
 !
 !
 ip dhcp excluded-address 172.16.12.1 172.16.12.10
@@ -81,7 +81,7 @@ interface Serial0/0/1
  shutdown
 !
 interface Vlan1
- no ip address
+ ip address 192.168.12.68 255.255.255.224
  shutdown
 !
 router ospf 1
@@ -95,6 +95,7 @@ router rip
  no auto-summary
 !
 ip nat inside source list 1 interface Serial0/0/0 overload
+ip default-gateway 172.16.12.98
 ip classless
 !
 ip flow-export version 9
