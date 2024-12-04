@@ -4,6 +4,7 @@ This network was developed as a redundant branch office in NYC, with multiple fa
 I designed this network with scalability, redundancy and reliability in mind, enabling seamless implementation of future modifications. My approach emphasizes adding versatility to networks, whether through integrating automation tools with foundational networking or making necessary adjustments as requirements evolve.
 
 Automated High-Availability Deployment Infrastructure
+
 Figure 3.11: Main Topology
 
 ![image](https://github.com/user-attachments/assets/8bb80974-cb35-44e8-b413-673aa4e1f9f1)
