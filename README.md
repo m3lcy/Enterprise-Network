@@ -1,4 +1,4 @@
-# Enterprise-network
+# Automated High-Availability Deployment Infrastructure
 A repository containing the Cisco device configurations for an Enterprise Wide Area Network (WAN).
 This network was developed as a redundant branch office in NYC, with multiple failover paths, connecting to the central office network based in SJ through NAT to ensure continuous operation even in the event of a connection failure.
 I designed this network with scalability, redundancy and reliability in mind, enabling seamless implementation of future modifications. My approach emphasizes adding versatility to networks, whether through integrating automation tools with foundational networking or making necessary adjustments as requirements evolve.
