@@ -35,6 +35,7 @@ This network comprises of L2/L3 networking protocols which consists of:
 - RIP
 - DHCP (DHCP can be done on the router or L3 Switch and server, in this case I did it on the router)
 - ACL
+- QOS
 
 Prerequisites for running the Ansible playbook:
 - Python installed
