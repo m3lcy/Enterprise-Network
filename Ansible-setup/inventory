@@ -1,0 +1,53 @@
+all:
+  children:
+    switches:
+      hosts:
+        R1:
+          ansible_host: 172.16.12.35
+          ansible_user: admin
+          ansible_password: cisco
+          ansible_network_os: ios
+          ansible_connection: network_cli
+          enable_password: cisco
+        DLS1:
+          ansible_host: 192.168.12.36
+          ansible_user: admin
+          ansible_password: cisco
+          ansible_network_os: ios
+          ansible_connection: network_cli
+          enable_password: cisco
+        DLS2:
+          ansible_host: 172.16.12.37
+          ansible_user: admin
+          ansible_password: cisco
+          ansible_network_os: ios
+          ansible_connection: network_cli
+          enable_password: cisco
+        SW1:
+          ansible_host: 172.16.12.38
+          ansible_user: admin
+          ansible_password: cisco
+          ansible_network_os: ios
+          ansible_connection: network_cli
+          enable_password: cisco
+        SW2:
+          ansible_host: 172.16.12.39
+          ansible_user: admin
+          ansible_password: cisco
+          ansible_network_os: ios
+          ansible_connection: network_cli
+          enable_password: cisco
+        SW3:
+          ansible_host: 172.16.12.40
+          ansible_user: admin
+          ansible_password: cisco
+          ansible_network_os: ios
+          ansible_connection: network_cli
+          enable_password: cisco
+        SW4:
+          ansible_host: 172.16.12.41
+          ansible_user: admin
+          ansible_password: cisco
+          ansible_network_os: ios
+          ansible_connection: network_cli
+          enable_password: cisco
