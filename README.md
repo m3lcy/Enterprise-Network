@@ -10,7 +10,7 @@ Figure 3.11: Main Topology
 ![image](https://github.com/user-attachments/assets/e9140b4a-3b1c-4658-8e4c-6000ed93a904)
 
 
-Figure 3.12: VLAN Segmentation - HPC VLANs
+Figure 3.12: VLAN Segmentation - High Performance Computing VLANs
 
 ![image](https://github.com/user-attachments/assets/4677ca6d-7053-42f2-946f-7ca98d3e470e)
 
