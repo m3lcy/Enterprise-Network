@@ -15,6 +15,11 @@
         commands:
           - enable secret cisco
 
+    - name: SET USERNAME
+      ios_config:
+        commands:
+          - username admin secret cisco123
+
     - name: ENCRYPT PLAIN TEXT
       ios_config:
         commands:
@@ -34,47 +39,78 @@
           - login local
           - transport input ssh
 
-    - name: GENERATE CRYPTO KEY
+    - name: SET DOMAIN NAME
       ios_config:
         commands:
           - no ip domain-lookup
           - ip domain-name cisco.com
           - username admin secret cisco
-          - crypto key generate rsa
-          - 1024
+
+    - name: GENERATE CRYPTO KEY
+      ios_config:
+        commands:
+          - crypto key generate rsa usage-keys label ssh-key modulus 1024
 
     - name: Enable IP Routing
       ios_config:
         commands:
           - ip routing
 
-    - name: Configure VLAN Names
+    - name: SET VLAN Names
       ios_config:
         parents:
           - vlan 10
         commands:
-          - name Sales
+          - name CORE
 
-    - name: Configure VLAN Names
+    - name: SET VLAN Names
       ios_config:
         parents:
           - vlan 20
         commands:
-          - name Engineering
+          - name MGMT
 
-    - name: Configure VLAN Names
+    - name: SET VLAN Names
       ios_config:
         parents:
           - vlan 30
         commands:
-          - name Marketing
+          - name COMPUTE
 
-    - name: Configure VLAN Names
+    - name: SET VLAN Names
       ios_config:
         parents:
           - vlan 99
         commands:
-          - name Management
+          - name NATIVE
+
+    - name: SET VLAN Names
+      ios_config:
+        parents:
+          - vlan 100
+        commands:
+          - name R&D
+
+    - name: SET VLAN Names
+      ios_config:
+        parents:
+          - vlan 200
+        commands:
+          - name EMPLOYEE
+
+    - name: SET VLAN Names
+      ios_config:
+        parents:
+          - vlan 300
+        commands:
+          - name GUEST
+
+    - name: SET VLAN Names
+      ios_config:
+        parents:
+          - vlan 999
+        commands:
+          - name BLACKHOLE
 
     - name: CONFIGURE VTP
       ios_config:  
@@ -87,7 +123,7 @@
       ios_config:
         commands:
           - spanning-tree mode pvst
-          - spanning-tree vlan 10,20,30 priority 24576
+          - spanning-tree vlan 10,20,30,100,200,300 priority 24576
 
     - name: CONFIGURE TRUNK AND NATIVE VLAN INTERFACE
       ios_config:
@@ -97,17 +133,36 @@
           - switchport trunk native vlan 99
           - switchport trunk encapsulation dot1q
           - switchport mode trunk
+          - no shutdown
 
     - name: CONFIGURE TRUNK INTERFACES 
       ios_config:
         parents:
-          - interface FastEthernet0/2
-          - interface FastEthernet0/3
+          - interface range FastEthernet0/2-3
         commands:
           - switchport trunk encapsulation dot1q
           - switchport mode trunk
+          - no shutdown
 
-    - name: CONFIGURE GIGABIT INTERFACE IP ADDRESS
+    - name: CONFIGURE TRUNK AND NATIVE VLAN INTERFACES
+      ios_config:
+        parents:
+          - interface range FastEthernet0/5-6
+        commands:
+          - switchport trunk native vlan 99
+          - switchport trunk encapsulation dot1q
+          - switchport mode trunk 
+          - no shutdown
+
+    - name: APPLY POLICY TO INBOUND TRAFFIC
+      ios_config:
+        parents:
+          - interface FastEthernet0/5
+        commands:
+          - service-policy input VLAN30_POLICY
+          - mls qos trust cos
+
+    - name: CONFIGURE GIGABIT INTERFACE
       ios_config:
         parents:
           - interface GigabitEthernet0/1
@@ -116,6 +171,7 @@
           - ip address 172.16.12.225 255.255.255.252
           - duplex auto
           - speed auto
+          - no shutdown
 
     - name: CONFIGURE GIGABIT INTERFACE
       ios_config:
@@ -125,6 +181,15 @@
           - switchport trunk native vlan 99
           - switchport trunk encapsulation dot1q
           - switchport mode trunk
+          - no shutdown
+
+
+    - name: CONFIGURE VLAN1
+      ios_config:
+        parents:
+          - interface vlan1
+        commands:
+          - ip address 192.168.12.36 255.255.255.224
 
     - name: CONFIGURE VLAN10
       ios_config: 
@@ -138,6 +203,7 @@
           - standby 1 ip 172.16.12.254
           - standby 1 priority 150
           - standby 1 preempt
+          - no shutdown
 
     - name: CONFIGURE VLAN20
       ios_config:
@@ -151,6 +217,7 @@
           - standby 1 ip 172.16.12.254
           - standby 1 priority 150
           - standby 1 preempt
+          - no shutdown
 
     - name: CONFIGURE VLAN30
       ios_config:
@@ -161,6 +228,12 @@
           - ip address 172.16.12.65 255.255.255.224
           - ip helper-address 172.16.12.226
           - ip nat inside
+          - standby version 2
+          - standby 1 ip 172.16.12.254
+          - standby 1 priority 150
+          - standby 1 preempt
+          - service-policy output VLAN30_Policy
+          - no shutdown
 
     - name: CONFIGURE VLAN99
       ios_config:
@@ -170,18 +243,74 @@
           - ip address 172.16.12.97 255.255.255.224
           - ip helper-address 172.16.12.226
           - ip nat inside
+          - standby 1 ip 172.16.12.254
+          - standby 1 priority 150
+          - standby 1 preempt
+          - no shutdown
+
+    - name: CONFIGURE VLAN100
+      ios_config:
+        parents:
+          - interface vlan100
+        commands:
+          - ip address 172.16.12.129 255.255.255.224
+          - ip helper-address 172.16.12.226
+          - ip nat inside
+          - no shutdown
+
+    - name: CONFIGURE VLAN200 
+      ios_config:
+        parents:
+          - interface vlan200
+        commands:
+          - ip address 172.16.12.161 255.255.255.224
+          - ip helper-address 172.16.12.226
+          - ip nat inside
+          - no shutdown
+
+    - name: CONFIGURE VLAN300
+      ios_config:
+        parents:
+          - interface vlan300
+        commands:
+          - ip address 172.16.12.193 255.255.255.224
+          - ip helper-address 172.16.12.226
+          - ip nat inside
+          - no shutdown
+
+    - name: SHUTDOWN ALL UNUSED PORTS
+      ios_config:
+        parents:
+          - interface FastEthernet0/4
+        commands:
+          - switchport access vlan 999
+          - switchport mode access
+          - shutdown
+
+    - name: SHUTDOWN ALL UNUSED PORTS
+      ios_config:
+        parents:
+          - interface range FastEthernet0/6-24
+        commands:
+          - switchport access vlan 999
+          - switchport mode access
+          - shutdown
 
     - name: CONFIGURE OSPF 
       ios_config:
         parents:
           - router ospf 1
         commands:
+          - router-id 1.1.1.1
           - log-adjacency-changes
           - network 172.16.12.0 0.0.0.31 area 0
           - network 172.16.12.32 0.0.0.31 area 0
           - network 172.16.12.64 0.0.0.31 area 0
           - network 172.16.12.96 0.0.0.31 area 0
           - network 172.16.12.224 0.0.0.31 area 0
+          - network 172.16.12.128 0.0.0.31 area 0
+          - network 172.16.12.160 0.0.0.31 area 0
+          - network 172.16.12.192 0.0.0.31 area 0
 
     - name: CONFIGURE RIP
       ios_config:
@@ -191,14 +320,27 @@
           - version 2
           - network 172.16.0.0
           - no auto-summary
-        
-    - name: CONFIGURE VLAN1
+    
+    - name: ENABLE QOS
       ios_config:
-        parents:
-          - interface vlan1
         commands:
-          - ip address 172.16.12.66 255.255.255.224
-      
+          - mls qos
+
+    - name: CONFIGURE ACCESS-LIST
+      ios_config:
+        commands:
+          - ip access-list extended VLAN30_ACL
+          - permit ip 172.16.12.64 0.0.0.31 any
+
+    - name: CONFIGURE QOS FOR VLAN 30 TRAFFIC PRIORITIZATION
+      ios_config:
+        commands:
+          - class-map match-any VLAN30_CLASS
+          - match access-group name VLAN30_ACL
+          - policy-map VLAN30_POLICY
+          - class VLAN30_CLASS
+          - priority percent 50
+
     - name: SET DEFAULT GATEWAY
       ios_config:
         commands:

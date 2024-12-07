@@ -15,6 +15,11 @@
         commands:
           - enable secret cisco
 
+    - name: SET USERNAME
+      ios_config:
+        commands:
+          - username admin secret cisco
+
     - name: SET BANNER
       ios_config:
         commands:
@@ -34,14 +39,17 @@
           - login local
           - transport input ssh
 
-    - name: GENERATE CRYPTO KEY
+    - name: SET DOMAIN NAME
       ios_config:
         commands:
           - no ip domain-lookup
           - ip domain-name cisco.com
           - username admin secret cisco
-          - crypto key generate rsa
-          - 1024  
+
+    - name: GENERATE CRYPTO KEY
+      ios_config:
+        commands:
+          - crypto key generate rsa usage-keys label ssh-key modulus 1024
 
     - name: CONFIGURE VTP
       ios_config:  
@@ -66,13 +74,10 @@
     - name: CONFIGURE INTERFACES
       ios_config:
         parents:
-          - interface FastEthernet0/2
-          - interface FastEthernet0/3
-          - interface FastEthernet0/4
-          - interface FastEthernet0/5
+          - interface range FastEthernet0/2-5
         commands:
-          - switchport access vlan 10
           - switchport mode access
+          - switchport access vlan 20
 
     - name: CONFIGURE GIGABIT INTERFACE
       ios_config:
@@ -82,12 +87,28 @@
           - switchport trunk native vlan 99
           - switchport mode trunk
 
+    - name: SHUTDOWN UNUSED GIGABIT INTERFACE
+      ios_config:
+        parents:
+          - interface GigabitEthernet0/2
+        commands:
+          - shutdown
+
+    - name: SHUTDOWN UNUSED PORTS
+      ios_config:
+        parents:
+          - interface range FastEthernet0/6-24
+        commands:
+          - switchport mode access
+          - switchport access vlan 999
+          - shutdown
+
     - name: CONFIGURE VLAN1
       ios_config:
         parents:
           - interface vlan1
         commands:
-          - ip address 172.16.12.1 255.255.255.224
+          - ip address 172.16.12.39 255.255.255.224
 
     - name: SET DEFAULT GATEWAY
       ios_config:

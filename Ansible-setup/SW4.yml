@@ -1,5 +1,5 @@
-- name: SW3 IOS CONFIG
-  hosts: SW3
+- name: SW4 IOS CONFIG
+  hosts: SW4
   connection: network_cli
   gather_facts: no
 
@@ -8,7 +8,7 @@
     - name: SET HOSTNAME
       ios_config:
         commands:
-          - hostname SW3
+          - hostname SW4
 
     - name: SET PASSWORD
       ios_config:
@@ -66,20 +66,36 @@
     - name: CONFIGURE TRUNK INTERFACE
       ios_config:
         parents:
-          - interface FastEthernet0/1
+          - interface range FastEthernet0/1-2
         commands:
           - switchport trunk native vlan 99
           - switchport mode trunk
-          - mls qos trust cos
 
-    - name: CONFIGURE INTERFACES FOR HPC AI TRAFFIC
+    - name: CONFIGURE VLAN300 INTERFACES
       ios_config:
         parents:
-          - interface range FastEthernet0/2-5
+          - interface FastEthernet0/3
         commands:
           - switchport mode access
-          - switchport access vlan 30
-          - mls qos cos 5
+          - switchport access vlan 300
+          - no shutdown
+
+    - name: CONFIGURE VLAN200 INTERFACES
+      ios_config:
+        parents:
+          - interface range FastEthernet0/13-15
+        commands:
+          - switchport mode access
+          - switchport access vlan 200
+          - no shutdown
+
+    - name: CONFIGURE VLAN100 INTERFACES
+      ios_config:
+        parents:
+          - interface range FastEthernet0/21-24
+        commands:
+          - switchport mode access
+          - switchport access vlan 100
           - no shutdown
 
     - name: CONFIGURE GIGABIT INTERFACE
@@ -89,7 +105,6 @@
         commands:
           - switchport trunk native vlan 99
           - switchport mode trunk
-          - mls qos trust cos
           - no shutdown
 
     - name: SHUTDOWN UNUSED GIGABIT INTERFACE
@@ -108,12 +123,39 @@
           - switchport access vlan 999
           - shutdown
 
+    - name: SHUTDOWN UNUSED GIGABIT INTERFACES
+      ios_config:
+        parents: 
+          - interface range GigabitEthernet0/1-2
+        commands:
+          - switchport mode access
+          - switchport access vlan 999
+          - shutdown
+
+    - name: SHUTDOWN UNUSED SWITCHPORTS
+      ios_config:
+        parents: 
+          - interface range FastEthernet0/5-11
+        commands:
+          - switchport mode access
+          - switchport access vlan 999
+          - shutdown
+
+    - name: SHUTDOWN UNUSED SWITCHPORTS
+      ios_config:
+        parents: 
+          - interface range FastEthernet0/16-20
+        commands:
+          - switchport mode access
+          - switchport access vlan 999
+          - shutdown
+
     - name: CONFIGURE VLAN1
       ios_config:
         parents:
           - interface vlan1
         commands:
-          - ip address 172.16.12.40 255.255.255.224
+          - ip address 172.16.12.41 255.255.255.224
           - no shutdown
 
     - name: SET DEFAULT GATEWAY
