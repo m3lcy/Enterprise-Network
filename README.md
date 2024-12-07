@@ -7,7 +7,8 @@ This network will undergo regular updates to accommodate continuous improvements
 
 Figure 3.11: Main Topology
 
-![image](https://github.com/user-attachments/assets/8bb80974-cb35-44e8-b413-673aa4e1f9f1)
+![image](https://github.com/user-attachments/assets/e9140b4a-3b1c-4658-8e4c-6000ed93a904)
+
 
 Figure 3.12: VLAN Segmentation
 
