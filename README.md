@@ -1,9 +1,7 @@
-# Automated High-Availability Deployment Infrastructure
-A repository containing the Cisco device configurations for an Enterprise Wide Area Network (WAN).
-This network was developed as a redundant branch office in NYC, with multiple failover paths, connecting to the central office network based in SJ through NAT to ensure continuous operation even in the event of a connection failure.
-I designed this network with scalability, redundancy and reliability in mind, enabling seamless implementation of future modifications. 
-
-This network will undergo regular updates to accommodate continuous improvements and evolving requirements, ensuring its capabilities remain adaptable and limitless.
+# OpenAI-Inspired Network Infrastructure for Scalable, Reliable AI Operations
+This project presents the design and implementation of an enterprise-grade Wide Area Network (WAN) 
+##
+See Below for details
 
 Figure 3.11: Main Topology
 
