@@ -24,7 +24,7 @@ At the core of this network design is a robust, scalable, and resilient architec
 **High Availability and Redundancy for Seamless AI Research** <br/>
 This network is structured to provide continuous connectivity between the branch office (NYC) and central office (SJ) through a redundant and highly available Wide Area Network (WAN). By utilizing NAT (Network Address Translation), uninterrupted connectivity is ensured even during network disruptions. The WAN is designed with multiple failover paths to guarantee that the infrastructure remains operational, supporting the large-scale computations required for AI model training and optimization. <br/>
 
-At the heart of the architecture, there is a primary and secondary Layer 3 switch setup, ensuring that routing capabilities remain uninterrupted, while providing high availability using HSRP (Hot Standby Router Protocol) for automatic failover. This design ensures that AI models can run continuously without network interruptions, even during failures or planned maintenance. <br/>
+At the heart of the architecture, there is a primary and secondary Layer 3 switch setup, ensuring that routing capabilities remain uninterrupted, while providing high availability using HSRP (Hot Standby Router Protocol) for automatic failover. To prevent loops and ensure fault-tolerant pathways within the Layer 2 domains, Spanning Tree Protocol (STP) is implemented across all switches. This design ensures that AI models can run continuously without network interruptions, even during failures or planned maintenance. <br/>
 
 **Optimized Network Segmentation for AI and Data Management** <br/>
 The network features dedicated Layer 2 switches for each major VLAN to optimize traffic flow and isolate critical workloads: <br/>
@@ -50,12 +50,12 @@ Leveraging Ansible for automation, the network's configuration and provisioning 
 From configuring trunking between switches to implementing ACLs (Access Control Lists) and OSPF for dynamic routing, Ansible allows for maintaining consistency and ease of management across the infrastructure. This automation also extends to DHCP and NAT configuration on the router, enabling centralized management and rapid deployment of new devices or configurations as the network grows to accommodate new AI models and services. <br/>
 
 **Robust Security and Flexible Network Management** <br/>
-The use of ACLs, VTP (VLAN Trunking Protocol), and SSH ensures that both security and management capabilities are tightly controlled. These technologies help secure internal traffic, prevent unauthorized access, and maintain strict controls on configuration management. By incorporating NAT and firewall protections, the security of critical AI model data is ensured while allowing for controlled external access where necessary. <br/>
+The use of STP, ACLs, VTP (VLAN Trunking Protocol), and SSH ensures that both security and management capabilities are tightly controlled. These technologies help secure internal traffic, prevent unauthorized access, and maintain strict controls on configuration management. By incorporating NAT and firewall protections, the security of critical AI model data is ensured while allowing for controlled external access where necessary. <br/>
 
 The dynamic routing protocols, including OSPF and RIP, ensure that routing information is automatically updated, supporting the redundancy and fault tolerance required for a globally distributed infrastructure. The network is resilient, capable of adjusting to topology changes and handling high-availability scenarios seamlessly, ensuring AI workloads continue to function without disruption. <br/>
 
 **Future-Proofed and Scalable Architecture** <br/>
-Designed with scalability in mind, this network is prepared for future growth, ensuring that as the demand for AI research and computational resources grows, the infrastructure can grow seamlessly. By designing the network with VLAN segmentation and distributed routing, the network can evolve to handle even larger datasets and AI models without compromising performance. <br/>
+Designed with scalability in mind, this network is prepared for future growth, ensuring that as the demand for AI research and computational resources grows, the infrastructure can grow seamlessly. By designing the network with VLAN segmentation, distributed routing and loop-prevention mechanisms, the network can evolve to handle even larger datasets and AI models without compromising performance. <br/>
 
 The infrastructure is adaptable to the rapidly changing landscape of AI, ensuring it is always ready to meet the demands of new projects, additional research teams, and larger-scale models. <br/>
 
