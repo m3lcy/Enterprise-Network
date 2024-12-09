@@ -18,7 +18,7 @@ Detailed explanation follows below.
 
 ![image](https://github.com/user-attachments/assets/6fe4f79a-0f5d-4777-b47a-89dee45562ee)
 
-
+##
 At the core of this network design is a robust, scalable, and resilient architecture designed to support high-performance AI workloads, ensuring that research, data processing, and operational tasks can continue seamlessly even during periods of failure or network disruption. Inspired by the best practices in AI infrastructure, this network is built to scale efficiently and provide the necessary reliability for mission-critical operations. <br/>
 
 **High Availability and Redundancy for Seamless AI Research** <br/>
