@@ -231,7 +231,7 @@
           - standby 1 ip 172.16.12.254
           - standby 1 priority 150
           - standby 1 preempt
-          - service-policy output VLAN30_Policy
+          - service-policy output VLAN30_POLICY
           - no shutdown
 
     - name: CONFIGURE VLAN99
