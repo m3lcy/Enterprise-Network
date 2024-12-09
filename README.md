@@ -1,6 +1,5 @@
 # OpenAI-Inspired Network Infrastructure for Scalable, Reliable AI Operations
-This project presents the design and implementation of an enterprise-grade Wide Area Network (WAN) 
-##
+This project presents the design and implementation of an enterprise-grade Wide Area Network (WAN) <br/>
 See Below for details
 
 Figure 3.11: Main Topology
