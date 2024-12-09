@@ -1,7 +1,7 @@
 # **AI-Inspired Network Infrastructure for Scalable, Reliable AI Operations**
 This project presents the design and implementation of an enterprise-grade Wide Area Network (WAN).
 This network will undergo regular updates to accommodate continuous improvements and evolving requirements, ensuring its capabilities remain adaptable and limitless. <br/>
-Detailed explanation follows below.
+Detailed explanation follows below:
 ##
 
 **Figure 3.11: Main Topology**
