@@ -98,6 +98,26 @@
           - switchport access vlan 100
           - no shutdown
 
+    - name: CONFIGURE PORT SECURITY FOR VLAN200
+      ios_config:
+        parents:
+          - interface range FastEthernet0/12-15
+        commands:
+          - switchport port-security
+          - switchport port-security maximum 1
+          - switchport port-security violation shutdown
+          - switchport port-security mac-address sticky
+
+    - name: CONFIGURE PORT SECURITY FOR VLAN100
+      ios_config:
+        parents:
+          - interface range FastEthernet0/21-24
+        commands:
+          - switchport port-security
+          - switchport port-security maximum 1
+          - switchport port-security violation shutdown
+          - switchport port-security mac-address sticky
+
     - name: CONFIGURE GIGABIT INTERFACE
       ios_config:
         parents:
