@@ -29,8 +29,8 @@ At the heart of the architecture, there is a primary and secondary Layer 3 switc
 **Optimized Network Segmentation for AI and Data Management** <br/>
 The network features dedicated Layer 2 switches for each major VLAN to optimize traffic flow and isolate critical workloads: <br/>
 
-- **Core VLAN (VLAN 10)** handles essential network functions, ensuring robust data flow between other VLANs.
-- **Management VLAN (VLAN 20)** is reserved for administrative tasks, securely managing network configuration and monitoring activities.
+- **Core VLAN (VLAN 10),** handles essential network functions, ensuring robust data flow between other VLANs.
+- **Management VLAN (VLAN 20),** is reserved for administrative tasks, securely managing network configuration and monitoring activities.
 - **Compute VLAN (VLAN 30)**, where AI traffic is prioritized, ensures that high-bandwidth, low-latency data traffic associated with AI model training receives optimal network resources.
   **Quality of Service (QoS)** policies are implemented to prioritize AI workloads, optimizing throughput and minimizing delays for real-time data processing. <br/>
   
@@ -38,9 +38,9 @@ For data-intensive AI tasks such as training large language models and reinforce
 
 In addition, the network incorporates a fourth Layer 2 switch supporting three critical VLANs related to research and development: <br/>
 
-- **R&D VLAN (VLAN 100)** is dedicated to research and development traffic, providing the necessary bandwidth for data-driven research tasks.
-- **Employee (VLAN 200)** supports internal employee network traffic, ensuring secure and reliable access to internal resources.
-- **Guest VLAN (VLAN 300)** handles guest and external access, facilitating connectivity for wireless devices such as phones and laptops through access points. <br/>
+- **R&D VLAN (VLAN 100),** is dedicated to research and development traffic, providing the necessary bandwidth for data-driven research tasks.
+- **Employee (VLAN 200),** supports internal employee network traffic, ensuring secure and reliable access to internal resources.
+- **Guest VLAN (VLAN 300),** handles guest and external access, facilitating connectivity for wireless devices such as phones and laptops through access points. <br/>
 
 This segmentation ensures the proper isolation of different traffic types, preventing congestion and enhancing security by keeping R&D, employee, and guest traffic separate. <br/>
 **Port security** is applied where appropriate on access interfaces connecting end devices, limiting unauthorized connections and enhancing the overall security of the network. This helps ensure that only authorized devices, such as workstations or research servers, can communicate over these VLANs. <br/>
