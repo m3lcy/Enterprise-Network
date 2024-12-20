@@ -43,6 +43,7 @@ In addition, the network incorporates a fourth Layer 2 switch supporting three c
 - **Guest VLAN (VLAN 300)** handles guest and external access, facilitating connectivity for wireless devices such as phones and laptops through access points. <br/>
 
 This segmentation ensures the proper isolation of different traffic types, preventing congestion and enhancing security by keeping R&D, employee, and guest traffic separate. <br/>
+**Port security** is applied where appropriate on access interfaces connecting end devices, limiting unauthorized connections and enhancing the overall security of the network. This helps ensure that only authorized devices, such as workstations or research servers, can communicate over these VLANs. <br/>
 
 **Comprehensive Automation for Seamless Management** <br/>
 Leveraging Ansible for automation, the network's configuration and provisioning processes are streamlined, reducing the potential for human error and enhancing scalability. Automation ensures that network devices are quickly and efficiently configured, updated, and monitored, providing the agility needed for rapidly evolving AI research and infrastructure demands. <br/>
@@ -52,10 +53,12 @@ From configuring **Trunking** between switches to implementing **ACLs (Access Co
 **Robust Security and Flexible Network Management** <br/>
 The use of **STP**, **ACLs**, **VTP (VLAN Trunking Protocol)**, and **SSH (Secure Shell)** ensures that both security and management capabilities are tightly controlled. These technologies help secure internal traffic, prevent unauthorized access, and maintain strict controls on configuration management. By incorporating **NAT** and firewall protections, the security of critical AI model data is ensured while allowing for controlled external access where necessary. <br/>
 
+**Port security** complements these measures by preventing unauthorized devices from connecting to access interfaces in critical areas, such as the Compute VLAN or Management VLAN, without needing configuration for every VLAN individually. <br/>
+
 The dynamic routing protocols, including **OSPF** and **RIP**, ensure that routing information is automatically updated, supporting the redundancy and fault tolerance required for a globally distributed infrastructure. The network is resilient, capable of adjusting to topology changes and handling high-availability scenarios seamlessly, ensuring AI workloads continue to function without disruption. <br/>
 
 **Future-Proofed and Scalable Architecture** <br/>
-Designed with scalability in mind, this network is prepared for future growth, ensuring that as the demand for AI research and computational resources grows, the infrastructure can grow seamlessly. By designing the network with VLAN segmentation, distributed routing and loop-prevention mechanisms, the network can evolve to handle even larger datasets and AI models without compromising performance. <br/>
+Designed with scalability in mind, this network is prepared for future growth, ensuring that as the demand for AI research and computational resources grows, the infrastructure can grow seamlessly. By designing the network with VLAN segmentation, distributed routing, loop-prevention mechanisms, and security policies like port security, the network can evolve to handle even larger datasets and AI models without compromising performance. <br/>
 
 The infrastructure is adaptable to the rapidly changing landscape of AI, ensuring it is always ready to meet the demands of new projects, additional research teams, and larger-scale models. <br/>
 
