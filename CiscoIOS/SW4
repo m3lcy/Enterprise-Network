@@ -75,18 +75,26 @@ interface FastEthernet0/11
 interface FastEthernet0/12
  switchport access vlan 200
  switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky 
 !
 interface FastEthernet0/13
  switchport access vlan 200
  switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky 
 !
 interface FastEthernet0/14
  switchport access vlan 200
  switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky 
 !
 interface FastEthernet0/15
  switchport access vlan 200
  switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky 
 !
 interface FastEthernet0/16
  switchport access vlan 999
@@ -116,18 +124,26 @@ interface FastEthernet0/20
 interface FastEthernet0/21
  switchport access vlan 100
  switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky 
 !
 interface FastEthernet0/22
  switchport access vlan 100
  switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky 
 !
 interface FastEthernet0/23
  switchport access vlan 100
  switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky 
 !
 interface FastEthernet0/24
  switchport access vlan 100
  switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky 
 !
 interface GigabitEthernet0/1
  shutdown
