@@ -44,7 +44,6 @@
         commands:
           - no ip domain-lookup
           - ip domain-name cisco.com
-          - username admin secret cisco
 
     - name: GENERATE CRYPTO KEY
       ios_config:
@@ -56,61 +55,20 @@
         commands:
           - ip routing
 
-    - name: SET VLAN Names
+    - name: CONFIGURE VLANs 
       ios_config:
-        parents:
-          - vlan 10
+        parents: "vlan {{ item.id }}"
         commands:
-          - name CORE
-
-    - name: SET VLAN Names
-      ios_config:
-        parents:
-          - vlan 20
-        commands:
-          - name MGMT
-
-    - name: SET VLAN Names
-      ios_config:
-        parents:
-          - vlan 30
-        commands:
-          - name COMPUTE
-
-    - name: SET VLAN Names
-      ios_config:
-        parents:
-          - vlan 99
-        commands:
-          - name NATIVE
-
-    - name: SET VLAN Names
-      ios_config:
-        parents:
-          - vlan 100
-        commands:
-          - name R&D
-
-    - name: SET VLAN Names
-      ios_config:
-        parents:
-          - vlan 200
-        commands:
-          - name EMPLOYEE
-
-    - name: SET VLAN Names
-      ios_config:
-        parents:
-          - vlan 300
-        commands:
-          - name GUEST
-
-    - name: SET VLAN Names
-      ios_config:
-        parents:
-          - vlan 999
-        commands:
-          - name BLACKHOLE
+          - name {{ item.name }}
+      loop:
+        - { id: 10, name: "CORE" }
+        - { id: 20, name: "MGMT" }
+        - { id: 30, name: "COMPUTE" }
+        - { id: 99, name: "NATIVE" }
+        - { id: 100, name: "R&D" }
+        - { id: 200, name: "EMPLOYEE" }
+        - { id: 300, name: "GUEST" }
+        - { id: 999, name: "BLACKHOLE" }
 
     - name: CONFIGURE VTP
       ios_config:  

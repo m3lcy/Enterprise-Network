@@ -44,7 +44,6 @@
         commands:
           - no ip domain-lookup
           - ip domain-name cisco.com
-          - username admin secret cisco
 
     - name: GENERATE CRYPTO KEY
       ios_config:
