@@ -1,0 +1,3 @@
+[submodule "pyATS-validation"]
+	path = pyATS-validation
+	url = https://github.com/m3lcy/pyATS-validation.git
