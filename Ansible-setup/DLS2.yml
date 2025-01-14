@@ -182,7 +182,7 @@
         parents:
           - router ospf 1
         commands:
-          - router-id 1.1.1.1
+          - router-id 3.3.3.3
           - log-adjacency-changes
           - network 172.16.12.224 0.0.0.31 area 0
           - network 172.16.12.0 0.0.0.31 area 0
