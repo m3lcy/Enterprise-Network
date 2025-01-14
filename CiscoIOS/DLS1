@@ -206,7 +206,6 @@ interface Vlan20
  standby 1 preempt
 !
 interface Vlan30
- description DLS1 Management Interface
  mac-address 00e0.a3a4.6403
  ip address 172.16.12.65 255.255.255.224
  ip helper-address 172.16.12.226
@@ -244,7 +243,7 @@ interface Vlan300
  ip nat inside
 !
 router ospf 1
- router-id 1.1.1.1
+ router-id 2.2.2.2
  log-adjacency-changes
  network 172.16.12.0 0.0.0.31 area 0
  network 172.16.12.32 0.0.0.31 area 0
