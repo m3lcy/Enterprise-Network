@@ -117,7 +117,7 @@
         parents:
           - interface vlan1
         commands:
-          - ip address 172.16.12.38 255.255.255.224
+          - ip address 192.168.12.38 255.255.255.224
 
     - name: SET DEFAULT GATEWAY
       ios_config:
