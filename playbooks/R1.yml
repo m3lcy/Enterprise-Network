@@ -1,5 +1,5 @@
-- name: R1 IOS CONFIG
-  hosts: R1
+- name: core-r1 IOS CONFIG
+  hosts: core-r1
   connection: network_cli
   gather_facts: no
 
@@ -8,7 +8,7 @@
     - name: SET HOSTNAME
       ios_config:
         commands:
-          - hostname R1
+          - hostname core-r1
 
     - name: CONFIGURE PASSWORD
       ios_config:

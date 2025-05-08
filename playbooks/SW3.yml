@@ -1,5 +1,5 @@
-- name: SW3 IOS CONFIG
-  hosts: SW3
+- name: access-sw-03 IOS CONFIG
+  hosts: access-sw-03
   connection: network_cli
   gather_facts: no
 
@@ -8,7 +8,7 @@
     - name: SET HOSTNAME
       ios_config:
         commands:
-          - hostname SW3
+          - hostname access-sw-03
 
     - name: SET PASSWORD
       ios_config:

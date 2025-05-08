@@ -1,5 +1,5 @@
-- name: DLS2 IOS CONFIG
-  hosts: DLS2
+- name: l3-sw-02 IOS CONFIG
+  hosts: l3-sw-02
   connection: network_cli
   gather_facts: no
 
@@ -8,7 +8,7 @@
     - name: SET HOSTNAME
       ios_config:
         commands:
-          - hostname DLS2
+          - hostname l3-sw-02
 
     - name: SET PASSWORD
       ios_config:

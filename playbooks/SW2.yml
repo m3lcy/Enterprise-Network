@@ -1,5 +1,5 @@
-- name: SW2 IOS CONFIG
-  hosts: SW2
+- name: access-sw-02 IOS CONFIG
+  hosts: access-sw-02
   connection: network_cli
   gather_facts: no
 
@@ -8,7 +8,7 @@
     - name: SET HOSTNAME
       ios_config:
         commands:
-          - hostname SW2
+          - hostname access-sw-02
 
     - name: SET PASSWORD
       ios_config:
