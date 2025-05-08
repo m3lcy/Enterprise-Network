@@ -146,7 +146,7 @@
         parents:
           - interface vlan10
         commands:
-          - ip address 172.16.12.2 255.255.255.252
+          - ip address 172.16.12.2 255.255.255.224
           - ip helper-address 172.16.12.229
           - ip nat inside
           - standby version 2
