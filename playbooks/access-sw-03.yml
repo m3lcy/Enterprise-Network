@@ -106,6 +106,8 @@
         parents:
           - interface GigabitEthernet0/2
         commands:
+          - switchport mode access
+          - switchport access 999
           - shutdown
 
     - name: SHUTDOWN UNUSED SWITCHPORTS
