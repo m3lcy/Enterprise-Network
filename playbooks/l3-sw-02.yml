@@ -13,12 +13,12 @@
     - name: SET PASSWORD
       ios_config:
         commands:
-          - enable secret cisco
+          - enable secret {{ enable_secret }}
 
     - name: SET USERNAME
       ios_config:
         commands:
-          - username admin secret cisco123
+          - username admin secret {{ admin_secret }}
 
     - name: ENCRYPT PLAIN TEXT
       ios_config:
@@ -35,7 +35,7 @@
         parents:
           - line vty 0 4
         commands:
-          - password cisco123
+          - password {{ vty_password }}
           - login local
           - transport input ssh
 
