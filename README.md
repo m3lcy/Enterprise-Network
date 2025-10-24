@@ -21,7 +21,8 @@ This network is designed to ensure continuous connectivity between the branch of
 **High Availability and Redundancy** <br/>
 - WAN connectivity with NAT ensures seamless branch to central communication, even during network disruptions.
 - Primary and secondary Layer 3 switches with HSRP provide automatic failover.
-- Spanning Tree Protocol (STP) ensures loop-free fault tolerant connectivity. <br/>
+- Spanning Tree Protocol (STP) ensures loop-free fault tolerant connectivity. 
+- Dynamic routing protocols (OSPF, RIP) allow the network to adapt to changes and maintain resilient routing. <br/>
 
 **Optimized Traffic Segmentation** <br/> 
 - Core VLAN (10): Essential network functions.
@@ -33,7 +34,7 @@ This network is designed to ensure continuous connectivity between the branch of
   **Port security restricts unauthorized device access, ensuring secure segmentation.** <br/>
 
 **Automation & Templates** <br/>
-- Ansible is used to automate configurations.
+- Ansible is used to automate configurations for various protocols and routing.
 - Jinja2 templates dynamically generate device configurations, reducing manual effort and ensuring consistency.
 - Automated logging and configuration deployment allow the network to be managed efficiently while preventing errors from manual configuration. <br/>
 
@@ -43,3 +44,8 @@ This network is designed to ensure continuous connectivity between the branch of
 **Future-Proof Design** <br/>
 - VLAN segmentation, distributed routing, loop-prevention, and security policies enable scalable growth.
 - Supports evolving workloads and additional research teams without performance compromise. <br/>
+
+##
+
+**TechStack**
+**Ansible**, **Jinja2**, **YAML**, **OSPF**, **QOS**, **VLANS**, **HSRP**, **NAT**, **Port Security**, **RIP**, **ACLs**, **STP**, **VTP**
