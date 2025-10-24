@@ -47,5 +47,5 @@ This network is designed to ensure continuous connectivity between the branch of
 
 ##
 
-**TechStack**
+**TechStack** <br/>
 **Ansible**, **Jinja2**, **YAML**, **OSPF**, **QOS**, **VLANS**, **HSRP**, **NAT**, **Port Security**, **RIP**, **ACLs**, **STP**, **VTP**
