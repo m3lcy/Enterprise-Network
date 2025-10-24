@@ -1,0 +1,83 @@
+hostname: "access-sw-01"
+
+line_vty:
+  range: 0 4
+  password: "{{ vty_password }}"
+  login: local
+  transport_input: ssh
+
+vtp:
+  mode: client
+  domain: BRANCH_NYC
+  version: 2
+
+stp:
+  mode: pvst
+
+interfaces:
+  - name: FastEthernet0/1
+    mode: trunk
+    native_vlan: 99 
+    shutdown: false
+
+  - name: FastEthernet0/2
+    mode: access
+    access_vlan: 20
+    shutdown: false
+    port_security:
+      enabled: true
+      maximum: 1
+      violation: shutdown
+      sticky: true
+
+  - name: FastEthernet0/3
+    mode: access
+    access_vlan: 20
+    shutdown: false
+    port_security:
+      enabled: true
+      maximum: 1
+      violation: shutdown
+      sticky: true
+
+  - name: FastEthernet0/4
+    mode: access
+    access_vlan: 20
+    shutdown: false
+    port_security:
+      enabled: true
+      maximum: 1
+      violation: shutdown
+      sticky: true
+
+  - name: FastEthernet0/5
+    mode: access
+    access_vlan: 20
+    shutdown: false
+    port_security:
+      enabled: true
+      maximum: 1
+      violation: shutdown
+      sticky: true
+
+  - name: FastEthernet0/6-24
+    mode: access
+    access_vlan: 999
+    shutdown: true
+
+  - name: GigabitEthernet0/1
+    mode: trunk
+    native_vlan: 99
+    shutdown: false
+
+  - name: GigabitEthernet0/2
+    mode: access
+    access_vlan: 999
+    shutdown: true
+
+  - name: VLAN1
+    ip_address: 192.168.12.39
+    subnet_mask: 255.255.255.224
+    shutdown: false
+
+default_gateway: 172.16.12.98

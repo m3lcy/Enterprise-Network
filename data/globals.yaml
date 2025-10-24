@@ -1,0 +1,11 @@
+banner: "Authorized Access Only!!!"
+
+service_password_encryption: true
+
+ip_routing: true
+
+domain:
+  lookup: false
+  name: "cisco.com"
+
+crypto_rsa_key: "crypto key generate rsa usage-keys label ssh-key modulus 1024"

@@ -1,0 +1,115 @@
+hostname: "core-r1"
+
+line_vty:
+  range: 0 4
+  password: "{{ vty_password }}"
+  login: local
+  transport_input: ssh
+
+stp:
+  mode: pvst
+
+interfaces:
+  - name: GigabitEthernet0/0
+    mode: routed
+    ip_address: 172.16.12.226
+    subnet_mask: 255.255.255.252
+    duplex: auto
+    speed: auto
+    shutdown: false
+
+  - name: GigabitEthernet0/1
+    mode: routed
+    ip_address: 172.16.12.229
+    subnet_mask: 255.255.255.252
+    duplex: auto
+    speed: auto
+    shutdown: false
+
+  - name: Serial0/0/0
+    mode: routed
+    ip_address: 172.17.12.1
+    subnet_mask: 255.255.255.0
+    nat_inside: false
+    clock_rate: 2000000
+    shutdown: false
+
+  - name: Serial0/0/1
+    shutdown: true
+
+  - name: VLAN1
+    ip_address: 192.168.12.35
+    subnet_mask: 255.255.255.224
+    shutdown: false
+
+dhcp:
+  excluded_addresses:
+    - { start: 172.16.12.1, end: 172.16.12.10 }
+    - { start: 172.16.12.33, end: 172.16.12.43 }
+    - { start: 172.16.12.65, end: 172.16.12.75 }
+    - { start: 172.16.12.97, end: 172.16.12.107 }
+    - { start: 172.16.12.129, end: 172.16.12.138 }
+    - { start: 172.16.12.161, end: 172.16.12.170 }
+    - { start: 172.16.12.193, end: 172.16.12.202 }
+  pools:
+    - vlan: 10
+      network: 172.16.12.0
+      subnet_mask: 255.255.255.224
+      default_router: 172.16.12.1
+
+    - vlan: 20
+      network: 172.16.12.32
+      subnet_mask: 255.255.255.224
+      default_router: 172.16.12.33
+
+    - vlan: 30
+      network: 172.16.12.64
+      subnet_mask: 255.255.255.224
+      default_router: 172.16.12.65
+
+    - vlan: 99
+      network: 172.16.12.96
+      subnet_mask: 255.255.255.224
+      default_router: 172.16.12.97
+
+    - vlan: 100
+      network: 172.16.12.128
+      subnet_mask: 255.255.255.224
+      default_router: 172.16.12.129
+
+    - vlan: 200
+      network: 172.16.12.160
+      subnet_mask: 255.255.255.224
+      default_router: 172.16.12.161
+
+    - vlan: 300
+      network: 172.16.12.192
+      subnet_mask: 255.255.255.224
+      default_router: 172.16.12.193
+
+routing:
+  ospf:
+    process_id: 1
+    router_id: 1.1.1.1
+    log_adjacency_changes: true
+    networks:
+      - { network: 172.17.0.0, wildcard: 0.0.255.255, area: 0 }
+
+  rip:
+    version: 2
+    networks: 
+      - 172.16.0.0
+      - 172.17.0.0
+    auto_summary: false
+
+nat:
+  inside_source_overload:
+    access_list: 1
+    interface: Serial0/0/0
+
+access_lists:
+  - name: 1
+    rules:
+      - permit: any
+
+default_gateway: 172.16.12.98

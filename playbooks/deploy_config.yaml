@@ -1,0 +1,83 @@
+- name: Render and deploy device configs
+  hosts: routers,l3_switches,access_switches
+  gather_facts: no
+  vars_files:
+    - ../data/globals.yaml
+
+  vars:
+    output_dir: "{{ playbook_dir }}/../outputs/{{ inventory_hostname }}"
+    log_dir: "{{ playbook_dir }}/../logs"
+    log_file: "{{ log_dir }}/{{ inventory_hostname }}.log"
+    timestamp: "{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}"
+
+  pre_tasks:
+    - name: Load host-specific variables
+      ansible.builtin.include_vars:
+        file: "../data/{{ inventory_hostname }}.yaml"
+      register: host_vars
+      ignore_errors: yes
+
+    - name: Ensure output directory exists
+      ansible.builtin.file:
+        path: "{{ output_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Ensure logs directory exists
+      ansible.builtin.file:
+        path: "{{ log_dir }}"
+        state: directory
+        mode: '0755'
+
+  tasks:
+    - block:
+        - name: Render config template to file
+          ansible.builtin.template:
+            src:  "{{ playbook_dir }}/../templates/device_config.j2"
+            dest: "{{ output_dir }}/config_{{ timestamp }}.cfg"
+            backup: yes
+          register: render_result
+
+        - name: Debug rendered file
+          ansible.builtin.stat:
+            path: "{{ output_dir }}/config_{{ timestamp }}.cfg"
+          register: rendered_file
+
+        - name: Log render success
+          ansible.builtin.lineinfile:
+            path: "{{ log_file }}"
+            line: "[{{ timestamp }}] Rendered config for {{ inventory_hostname }}"
+            create: true
+            insertafter: EOF
+
+        - name: Push config to device
+          cisco.ios.ios_config:
+            lines: "{{ lookup('template', '../templates/device_config.j2') }}"
+            backup: yes
+            diff_against: running
+
+        - name: Log push success
+          ansible.builtin.lineinfile:
+            path: "{{ log_file }}"
+            line: "[{{ timestamp }}] Pushed config to {{ inventory_hostname }}"
+            create: true
+            insertafter: EOF
+
+      rescue:
+        - name: Log failure
+          ansible.builtin.lineinfile:
+            path: "{{ log_file }}"
+            line: >-
+              [{{ timestamp }}] Failed to render or push config for {{ inventory_hostname }}:
+              {{ render_result.msg | default('Render not attempted') }},
+              {{ push_result.msg | default('Push not attempted') }}
+            create: true
+            insertafter: EOF
+
+      always:
+        - name: Log task completion
+          ansible.builtin.lineinfile:
+            path: "{{ log_file }}"
+            line: "[{{ timestamp }}] Task finished for {{ inventory_hostname }}"
+            create: true
+            insertafter: EOF

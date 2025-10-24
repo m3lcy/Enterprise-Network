@@ -1,0 +1,197 @@
+hostname: "l3-sw-01"
+
+ip_routing: true
+
+line_vty:
+  range: 0 4
+  password: "{{ vty_password }}"
+  login: local
+  transport_input: ssh
+
+vlans: 
+  - { id: 10, name: CORE }
+  - { id: 20, name: MGMT }
+  - { id: 30, name: COMPUTE }
+  - { id: 99, name: NATIVE }
+  - { id: 100, name: R&D }
+  - { id: 200, name: EMPLOYEE }
+  - { id: 300, name: GUEST }
+  - { id: 999, name: BLACKHOLE }
+
+vtp:
+  mode: server
+  domain: BRANCH_NYC
+  version: 2
+
+stp:
+  mode: pvst
+  vlans: [10,20,30,100,200,300]
+  priority: 24576
+
+interfaces:
+  - name: FastEthernet0/1
+    mode: trunk
+    native_vlan: 99 
+    shutdown: false
+
+  - name: FastEthernet0/2
+    mode: trunk
+    shutdown: false
+
+  - name: FastEthernet0/3
+    mode: trunk
+    shutdown: false
+
+  - name: FastEthernet0/5
+    mode: trunk
+    native_vlan: 99
+    service_policy_input: VLAN30_POLICY
+    mls_qos_trust_cos: true
+    shutdown: false
+
+  - name: FastEthernet0/6
+    mode: trunk
+    native_vlan: 99
+    shutdown: false
+
+  - name: FastEthernet0/4
+    mode: access
+    access_vlan: 999
+    shutdown: true
+
+  - name: FastEthernet0/7-24
+    mode: access
+    access_vlan: 999
+    shutdown: true
+
+  - name: GigabitEthernet0/1
+    mode: routed
+    ip_address: 172.16.12.225
+    subnet_mask: 255.255.255.252
+    duplex: auto 
+    speed: auto
+    shutdown: false
+
+  - name: GigabitEthernet0/2
+    mode: trunk
+    native_vlan: 99
+    shutdown: false
+
+  - name: VLAN1
+    ip_address: 192.168.12.36
+    subnet_mask: 255.255.255.224
+    shutdown: false
+
+  - name: VLAN10
+    ip_address: 172.16.12.1
+    subnet_mask: 255.255.255.224
+    helper_address: 172.16.12.226
+    nat_inside: true
+    shutdown: false
+    hsrp:
+      version: 2
+      group: 1
+      ip: 172.16.12.254
+      priority: 150
+      preempt: true
+
+  - name: VLAN20
+    ip_address: 172.16.12.33
+    subnet_mask: 255.255.255.224
+    helper_address: 172.16.12.226
+    nat_inside: true
+    shutdown: false
+    hsrp:
+      version: 2
+      group: 1
+      ip: 172.16.12.254
+      priority: 150
+      preempt: true
+    
+  - name: VLAN30
+    ip_address: 172.16.12.65
+    subnet_mask: 255.255.255.224
+    helper_address: 172.16.12.226
+    nat_inside: true
+    shutdown: false
+    hsrp:
+      version: 2
+      group: 1
+      ip: 172.16.12.254
+      priority: 150
+      preempt: true
+    service_policy_output: VLAN30_POLICY
+
+  - name: VLAN99
+    ip_address: 172.16.12.97
+    subnet_mask: 255.255.255.224
+    helper_address: 172.16.12.226
+    nat_inside: true
+    shutdown: false
+    hsrp: 
+      version: 2
+      group: 1
+      ip: 172.16.12.254
+      priority: 150
+      preempt: true
+
+  - name: VLAN100
+    ip_address: 172.16.12.129
+    subnet_mask: 255.255.255.224
+    helper_address: 172.16.12.226
+    nat_inside: true
+    shutdown: false
+
+  - name: VLAN200
+    ip_address: 172.16.12.161
+    subnet_mask: 255.255.255.224
+    helper_address: 172.16.12.226
+    nat_inside: true
+    shutdown: false
+
+  - name: VLAN300
+    ip_address: 172.16.12.193
+    subnet_mask: 255.255.255.224
+    helper_address: 172.16.12.226
+    nat_inside: true
+    shutdown: false
+
+routing:
+  ospf:
+    process_id: 1
+    router_id: 2.2.2.2
+    log_adjacency_changes: true
+    networks:
+      - { network: 172.16.12.0, wildcard: 0.0.0.31, area: 0 }
+      - { network: 172.16.12.32, wildcard: 0.0.0.31, area: 0 }
+      - { network: 172.16.12.64, wildcard: 0.0.0.31, area: 0 }
+      - { network: 172.16.12.96, wildcard: 0.0.0.31, area: 0 }
+      - { network: 172.16.12.128, wildcard: 0.0.0.31, area: 0 }
+      - { network: 172.16.12.160, wildcard: 0.0.0.31, area: 0 }
+      - { network: 172.16.12.192, wildcard: 0.0.0.31, area: 0 }
+      - { network: 172.16.12.224, wildcard: 0.0.0.31, area: 0 }
+
+  rip: 
+    version: 2
+    networks: 
+      - 172.16.0.0
+    auto_summary: false
+
+  qos: 
+    enable_mls_qos: true
+    vlan30:
+      acl: VLAN30_ACL
+      class_map: VLAN30_CLASS
+      policy_map: VLAN30_POLICY
+      priority_percent: 50
+
+  access_lists:
+    - name: VLAN30_ACL
+      type: extended
+      rules: 
+        - permit: ip
+          src: 172.16.12.64
+          wildcard: 0.0.0.31
+          dest: any
+
+  default_gateway: 172.16.12.98

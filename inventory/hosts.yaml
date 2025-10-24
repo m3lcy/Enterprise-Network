@@ -1,6 +1,6 @@
 all:
   children:
-    switches:
+    routers:
       hosts:
         core-r1:
           ansible_host: 172.16.12.35
@@ -9,6 +9,9 @@ all:
           ansible_network_os: ios
           ansible_connection: network_cli
           enable_password: cisco
+    
+    l3_switches:
+      hosts:
         l3-sw-01:
           ansible_host: 192.168.12.36
           ansible_user: admin
@@ -23,6 +26,9 @@ all:
           ansible_network_os: ios
           ansible_connection: network_cli
           enable_password: cisco
+
+    access_switches:
+      hosts:
         access-sw-01:
           ansible_host: 192.168.12.38
           ansible_user: admin
