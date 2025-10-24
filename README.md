@@ -29,7 +29,7 @@ This network is designed to ensure continuous connectivity between the branch of
 - Compute VLAN (30): Prioritized AI workloads with QoS for low-latency and high bandwidth data processing.
 - R&D (100): Supports research and development traffic.
 - Employee (200): Provides internal employee network access.
-- Guest (300): Supports external and wireless device connectivity.
+- Guest (300): Supports external and wireless device connectivity. <br/>
   **Port security restricts unauthorized device access, ensuring secure segmentation.** <br/>
 
 **Automation & Templates** <br/>
